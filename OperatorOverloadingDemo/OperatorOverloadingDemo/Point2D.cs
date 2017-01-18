@@ -8,9 +8,9 @@ namespace OperatorOverloadingDemo
 {
     public struct Point2D
     {
-        public byte X { get; set; }
-        public byte Y { get; set; }
-        public Point2D (byte x, byte y)
+        public float X { get; set; }
+        public float Y { get; set; }
+        public Point2D (float x, float y)
         {
             this.X = x;
             this.Y = y;

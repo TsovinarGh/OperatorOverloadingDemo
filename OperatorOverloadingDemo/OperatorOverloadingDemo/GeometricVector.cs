@@ -6,102 +6,97 @@ using System.Threading.Tasks;
 
 namespace OperatorOverloadingDemo
 {
-    //Երկու վեկտորների տարբերության յուրաքանչյուր կոորդինատ հավասար է 
-    //այդ վեկտորների համապատասխան կոորդինատների տարբերությանը։
-
     public class GeometricVector
-    {
+    {   
         protected Point2D StartPosition { get; set; }
         protected Point2D EndPosition { get; set; }
-        private Point2D coordinate;
-      //  protected 
+        private Point2D vectorCoordinate;
 
-        public GeometricVector(Point2D start, Point2D end)
+        #region Constructor
+        
+        public GeometricVector(Point2D vectorStart, Point2D vectorEnd)
         {
-            this.StartPosition = start;
-            this.EndPosition = end;
-            this.coordinate = new Point2D((byte)(end.X - start.X), (byte)(end.Y - start.Y));
+            this.StartPosition = vectorStart;
+            this.EndPosition = vectorEnd;
+            this.vectorCoordinate = new Point2D((vectorEnd.X - vectorStart.X), (vectorEnd.Y - vectorStart.Y));
         }
 
-        public GeometricVector(byte x1, byte y1, byte x2, byte y2)
+        public GeometricVector(float x1, float y1, float x2, float y2)
         {
             this.StartPosition = new Point2D(x1, y1);
             this.EndPosition = new Point2D(x2, y2);
+            this.vectorCoordinate = new Point2D((x2 - x1), (y2 - y1));
         }
 
-        private GeometricVector(Point2D coordinate)
+        public GeometricVector(Point2D vectorCoordinate)
         {
-            this.coordinate = coordinate;
+            this.vectorCoordinate = vectorCoordinate;
+        }
+
+        public GeometricVector(float x, float y)
+        {
+            this.vectorCoordinate = new Point2D(x, y);
+        }
+
+        #endregion
+        // Functions
+        public Point2D GetVectorCordinate()
+        {
+            return vectorCoordinate;
         }
 
         public override string ToString()
         {
-            return ($"Vectors start coordinats are {StartPosition}, Vectors end coordinats are {EndPosition}");
+            return ($"{vectorCoordinate}");
         }
 
-        public static GeometricVector operator + (GeometricVector pd1, GeometricVector pd2)
+        public double GetVectorLength()
         {
-            return new GeometricVector( new Point2D((byte)(pd1.coordinate.X+pd2.coordinate.X), (byte)(pd1.coordinate.Y+pd2.coordinate.Y)));
+            return Math.Sqrt(Math.Pow((this.vectorCoordinate.X), 2) + Math.Pow((this.vectorCoordinate.Y), 2));
+        }
+        //
+        #region Operator Overloading
+
+        public static GeometricVector operator +(GeometricVector pd1, GeometricVector pd2)
+        {
+            return new GeometricVector(
+            new Point2D((pd1.vectorCoordinate.X + pd2.vectorCoordinate.X), (pd1.vectorCoordinate.Y + pd2.vectorCoordinate.Y)));
         }
 
         public static GeometricVector operator -(GeometricVector pd1, GeometricVector pd2)
         {
-            return new GeometricVector(new Point2D((byte)(pd1.coordinate.X - pd2.coordinate.X), (byte)(pd1.coordinate.Y - pd2.coordinate.Y)));
+            return new GeometricVector(
+            new Point2D((pd1.vectorCoordinate.X - pd2.vectorCoordinate.X), (pd1.vectorCoordinate.Y - pd2.vectorCoordinate.Y)));
         }
-
-        //Հավասար վեկտորներն ունեն համապատասխան հավասար կոորդինատներ։ 
-        //Եվ հակադարձը՝ եթե երկու վեկտորների համապատասխան կոորդինատները
-        //հավասար են, ապա այդ վեկտորները հավասար են։
-
 
         public static bool operator ==(GeometricVector pd1, GeometricVector pd2)
         {
-            if (pd1 == null || pd2 == null)
-            {
-                return false;
-            }
-            if ((pd1.coordinate.X == pd2.coordinate.X) && (pd2.coordinate.Y == pd2.coordinate.Y))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return pd1.Equals(pd2);
         }
 
         public static bool operator !=(GeometricVector pd1, GeometricVector pd2)
         {
-            if (pd1 == null || pd2 == null)
-            {
-                return false;
-            }
-            if ((pd1.coordinate.X != pd2.coordinate.X) || (pd2.coordinate.Y != pd2.coordinate.Y))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (!pd1.Equals(pd2));
         }
 
         public override bool Equals(object obj)
         {
             if (obj == null)
             {
-                return false; //inchu exeption chenq throw anum????
+                return false; 
             }
-            var p = obj as GeometricVector;
-            if (p == null)
+            var vec = obj as GeometricVector;
+            if (vec == null)
             {
                 return false;
             }
-            return ((this.coordinate.X==p.coordinate.X) && (this.coordinate.Y==p.coordinate.Y));
+            return ((this.vectorCoordinate.X == vec.vectorCoordinate.X) && (this.vectorCoordinate.Y == vec.vectorCoordinate.Y));
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+        #endregion
     }
 }
