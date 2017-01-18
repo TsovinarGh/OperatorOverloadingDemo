@@ -50,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OperatorOverloadingDemo\OperatorOverloadingDemo.csproj">
+    <ProjectReference Include="..\OperatorOverloadingDemo\OperatorOverloading.csproj">
       <Project>{9a1fa5d0-75c2-47d8-acbc-1baf48eb7fd2}</Project>
-      <Name>OperatorOverloadingDemo</Name>
+      <Name>OperatorOverloading</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OperatorOverloadingDemo
+
+namespace OperatorOverloading
 {
     public struct Point2D
     {
@@ -18,7 +15,7 @@ namespace OperatorOverloadingDemo
 
         public override string ToString()
         {
-            return ($" Vector coordinates are {X},{Y}");
+            return ($"Vector coordinates are: {X}, {Y}");
         }
 
 

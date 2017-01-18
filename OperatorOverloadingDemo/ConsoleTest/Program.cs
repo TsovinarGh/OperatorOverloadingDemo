@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OperatorOverloadingDemo;
+using OperatorOverloading;
 
 namespace ConsoleTest
 {
@@ -16,8 +12,7 @@ namespace ConsoleTest
             var vec2 = new GeometricVector(3, 3, 6, 6);
             Console.WriteLine(vec2.GetVectorCordinate());           // the output is: 3, 3
             var vec3 = new GeometricVector(new Point2D(2, 2));
-            GeometricVector sumvec = vec1 + vec2;
-            Console.WriteLine($"sumvec= {sumvec}");                  // the output is: 5, 5 
+            Console.WriteLine($"vec1 + vec2 {vec1 + vec2}");          // the output is: 5, 5 
             Console.WriteLine(vec1.Equals(vec2));                   // the output is: false
             Console.WriteLine(vec1==vec2);                         // the output is: false   
             Console.WriteLine(vec1==vec3);                        // the output is: true    
