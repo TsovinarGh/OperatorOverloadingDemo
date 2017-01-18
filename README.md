@@ -2,7 +2,7 @@
 
 ***Description:***
 
-In this repository I have demonstrated overloading of  +, - and == operators in geometric vectors example
+In this repository I have demonstrated overloading of  +, - and == operators in geometric vectors example.
 
 ***How to use:***
 
